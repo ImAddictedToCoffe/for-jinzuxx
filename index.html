@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+  <meta charset="utf-8"/>
+
+  <title>Title of webpage</title>
+
+  <link rel="stylesheet" type="text/css" href="style.css" />
+
+  <script>
+    //variables
+
+    //TSTCODE are just examples if you want more then one disscount code
+    //The number should be 1-discount% so 25% off is 1-.25=.75
+    var discountCodes = [
+      ["TSTCODE50", 0.5],
+      ["TSTCODE75", 0.25],
+      ["STU25", 0.75]
+    ];
+
+    var price = 175;
+
+    //functions
+
+    function input()
+    {
+      var name = document.getElementById("nameForm").name.value;;
+      var code = document.getElementById("discountCodeForm").code.value;;
+
+      checkOut(name, price, code, discountCodes);
+    }
+
+    function checkOut(name, price, discountCode, discountCodes)
+    {
+      if(finalPrice = price*discount(discountCode, discountCodes) > 0)
+      {
+        finalPrice = price*discount(discountCode, discountCodes);
+        document.getElementById("checkOutMsg").innerHTML = "Congrats "+name+" you qualify for a discount, final price is $"+finalPrice;
+      }
+      else
+      {
+        document.getElementById("checkOutMsg").innerHTML = "Enjoy your purchase "+name+", final price is $"+price;
+      }
+    }
+
+    function discount(discountCode, discountCodes)
+    {
+      for(var i = 0; i < discountCodes.length; i++)
+      {
+        if(discountCode == discountCodes[i][0])
+        {
+          console.log("Code found");
+          return discountCodes[i][1];
+        }
+      }
+    }
+
+  </script>
+</head>
+<body>
+  <p>
+    Base price of the Adobe subscription is $175.
+  </p>
+  <div class="main-form">
+    <form id="nameForm">
+      <input
+      type="text"
+      name="name"
+      placeholder="Name"
+      required
+      />
+    </form>
+  </div>
+  <div class="form">
+    <form id="discountCodeForm">
+      <input
+      type="text"
+      name="code"
+      placeholder="Enter Discount Code"
+      required
+      />
+      <input type="button" onclick="input()" value="Purchase">
+    </form>
+  </div>
+  <p id="checkOutMsg"></p>
+</body>
+</html>
